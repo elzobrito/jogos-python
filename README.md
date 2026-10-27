@@ -1,6 +1,6 @@
 # Jogos Educativos em Python (Pygame-CE)
 
-Coleção de 14 jogos didáticos desenvolvidos em **Python 3** com a biblioteca **pygame-ce** (Community Edition), concebidos como material de apoio pedagógico para o ensino de programação, estruturas de dados, algoritmos, matemática para jogos e arquitetura de software.
+Coleção de 13 jogos didáticos desenvolvidos em **Python 3** com a biblioteca **pygame-ce** (Community Edition), concebidos como material de apoio pedagógico para o ensino de programação, estruturas de dados, algoritmos, matemática para jogos e arquitetura de software.
 
 Cada projeto foi desenhado para expor conceitos essenciais de desenvolvimento de software em código legível, didático e pronto para execução e modificação pelos estudantes em sala de aula ou laboratório.
 
@@ -43,7 +43,6 @@ A saída esperada deve exibir a versão do pygame-ce (ex.: `2.5.8` ou superior).
 | **Tetris** | Intermediário / Avançado | Matrizes, rotação de blocos, ghost piece, retenção (HOLD), sintetizador chiptune PCM | `cd tetris && python3 tetris.py` | — |
 | **Sudoku** | Avançado | Recursão e backtracking, matriz 9×9, prova de unicidade de solução, dicas | `cd sudoku && python3 main.py` | — |
 | **Pac-Man** | Avançado | Grid por tiles, encruzilhadas, 4 IAs originais (Chase/Scatter/Frightened), BFS | `cd pac-man && python3 main.py` | — |
-| **Corrida de Espermatozoides** | Intermediário | Projeção pseudo-3D (OutRun), FOV dinâmico, animação senoidal, colisão 1.5D | `cd corrida-esperma && python3 main.py` | — |
 | **Xadrez** | Avançado | Regras FIDE (roque, en passant, promoção), Minimax com poda Alfa-Beta, perft | `cd xadrez && python3 main.py` | — |
 | **Egg Game** | Avançado | Arquitetura modular desacoplada, passo fixo (fixed timestep), one-way collision, testes pytest | `cd egg-game && python3 main.py` | — |
 
@@ -54,43 +53,7 @@ A saída esperada deve exibir a versão do pygame-ce (ex.: `2.5.8` ou superior).
 
 ---
 
-### 3.1. Corrida de Espermatozoides (`corrida-esperma`)
-
-#### O que é
-Jogo de corrida pseudo-3D no estilo arcade retrô (OutRun / Top Gear) com visão traseira em túnel circular curvo. O jogador disputa posição com outros 79 corredores pelo interior do trato reprodutivo até alcançar o óvulo na linha de chegada.
-
-#### O que ensina (conceitos reais no código)
-* **Projeção pseudo-3D retrô**: função `projetar_yz(z_rel, fov)` mapeia coordenadas tridimensionais de mundo em coordenadas de tela bidimensionais usando horizonte fixo (`HORIZONTE_Y = 160`) e escala inversa à distância `z_rel`.
-* **Campo de visão dinâmico (FOV)**: transição suave entre `FOV_BASE = 1.0` e `FOV_TURBO = 1.22` via interpolação linear (`lerp`) quando o turbo é ativado.
-* **Matemática procedural e senoidal**: ondulação orgânica da cauda do espermatozoide calculada com `math.sin` em `desenhar_esperma()`, além de interpolações de cor em `cor_lerp()` e funções de limite com `clamp()`.
-* **Estruturas de dados com Dataclasses**: `@dataclass` estruturando `Segmento`, `Corredor`, `Globulo` e `Particula`.
-* **IA estocástica de adversários**: em `_atualizar_rivais()`, cada rival gerencia um temporizador (`timer_ia`), escolhe alvos laterais aleatórios (`alvo_x`), gerencia energia de turbo e desvia ao ser empurrado por obstáculos.
-* **Colisão cilíndrica 1.5D**: detecção de impacto entre corredores e glóbulos em `_atualizar_globulos()` comparando distância longitudinal `Z` e transversal `X`.
-* **Máquina de estados**: controle de fluxo da partida pelos estados `"contagem"`, `"correndo"`, `"pausa"`, `"vitoria"` e `"derrota"`.
-
-#### Controles
-* **Mover para a esquerda / direita**: Setas `←` / `→` ou teclas `A` / `D`
-* **Impulso / Turbo**: Barra de Espaço (`K_SPACE`) (consome energia recarregável)
-* **Pausar**: Tecla `P` (navegação no menu com `↑`/`↓` ou `W`/`S`, confirmação com `Enter` ou `Espaço`)
-* **Reiniciar**: Tecla `R`
-* **Sair**: Tecla `ESC`
-
-#### Como rodar
-```bash
-cd corrida-esperma
-python3 main.py
-```
-* **Flags disponíveis**:
-  * `--demo`: executa piloto automático com semente aleatória determinística e salva screenshots em `prints/` (`largada.png`, `meio.png`, `chegada.png`).
-
-#### Exercícios e extensões pedagógicas
-1. **Adicionar itens de recarga (Glicose)**: instancie objetos colecionáveis ao longo da pista que recarregam a barra de energia do jogador ao contato.
-2. **Implementar relevo vertical**: adicione uma componente de elevação `y` aos segmentos da pista na função `projetar_yz` para criar subidas e descidas no túnel.
-3. **Placar de tempos (Leaderboard)**: registre e ordene em um arquivo JSON o tempo decorrido do jogador ao cruzar a linha de chegada.
-
----
-
-### 3.2. Snake (`snake`)
+### 3.1. Snake (`snake`)
 
 > 🎬 **Aula em vídeo:** roteiro falado em [`snake/docs/roteiro.md`](snake/docs/roteiro.md) e código passo a passo (5 partes executáveis) em [`snake/partes/`](snake/partes/).
 
@@ -123,7 +86,7 @@ python3 snake_completo.py
 
 ---
 
-### 3.3. Pong (`pong`)
+### 3.2. Pong (`pong`)
 
 > 🎬 **Aula em vídeo:** roteiro falado em [`pong/docs/roteiro.md`](pong/docs/roteiro.md) e código passo a passo (5 partes executáveis) em [`pong/partes/`](pong/partes/).
 
@@ -158,7 +121,7 @@ python3 pong.py
 
 ---
 
-### 3.4. Squash Arcade (`squash-arcade`)
+### 3.3. Squash Arcade (`squash-arcade`)
 
 > 🎬 **Aula em vídeo:** roteiro falado em [`squash-arcade/docs/roteiro.md`](squash-arcade/docs/roteiro.md) e código passo a passo (5 partes executáveis) em [`squash-arcade/partes/`](squash-arcade/partes/).
 
@@ -194,7 +157,7 @@ python3 squash.py
 
 ---
 
-### 3.5. Genius Musical (`genius-musical`)
+### 3.4. Genius Musical (`genius-musical`)
 
 > 🎬 **Aula em vídeo:** roteiro falado em [`genius-musical/docs/roteiro.md`](genius-musical/docs/roteiro.md) e código passo a passo (5 partes executáveis) em [`genius-musical/partes/`](genius-musical/partes/).
 
@@ -228,7 +191,7 @@ python3 main.py
 
 ---
 
-### 3.6. Breakout (`breakout`)
+### 3.5. Breakout (`breakout`)
 
 > 🎬 **Aula em vídeo:** roteiro falado em [`breakout/docs/roteiro.md`](breakout/docs/roteiro.md) e código passo a passo (5 partes executáveis) em [`breakout/partes/`](breakout/partes/).
 
@@ -256,6 +219,40 @@ python3 breakout.py
 1. **Power-ups colecionáveis**: faça certos tijolos liberarem cápsulas que descem pela tela e, ao serem apanhadas pela raquete, dobram sua largura ou adicionam uma segunda bola.
 2. **Tijolos inquebráveis**: introduza tijolos cinzas com vida infinita que atuam como barreiras fixas de desafio geométrico.
 3. **Múltiplas fases**: crie uma lista de padrões de tijolos carregados sequencialmente ao esvaziar a tela.
+
+---
+
+### 3.6. Flappy Bird (`flappy-bird`)
+
+#### O que é
+Adaptação em tela vertical (`400×600`) do fenômeno Flappy Bird: um pássaro animado deve voar através de aberturas entre canos verdes com alturas aleatórias, sofrendo ação de gravidade contínua e rotação angular dinâmica.
+
+#### O que ensina (conceitos reais no código)
+* **Gravidade newtoniana contínua e impulso**: a velocidade vertical é integrada a cada quadro em `atualizar()` por `bird_v += GRAVIDADE * (dt * 60)`, enquanto a função `flap()` zera a descida e aplica impulso ascendente instantâneo (`bird_v = FLAP_V = -8.0`).
+* **Atitude e rotação angular proporcional**: a orientação do sprite é calculada dinamicamente a partir da velocidade vertical (`self.angulo = min(35.0, max(-80.0, -self.bird_v * 5.0))`), apontando o bico para cima ao bater asas e mergulhando em direção ao solo em queda livre.
+* **Geração procedural e reciclagem de obstáculos**: classe `@dataclass Cano` modela obstáculos com centro do vão aleatório (`gap_y`), gerando retângulos independentes de colisão superior e inferior (`topo_rect` e `base_rect`) via `_novo_cano()`.
+* **Colisão AABB**: checagem de colisão da caixa envolvente do pássaro contra canos, teto e linha do solo em `bird_rect().colliderect()`.
+* **Ilusão de scroll e parallax**: deslocamento modular contínuo do chão em `self.chao_off = (self.chao_off + VEL_SCROLL * dt * 60) % 20`.
+* **Animação procedural de asas**: batimento orgânico de asas calculado por função senoidal em `self.asa`.
+* **Automação no modo demo**: método `_auto_flap()` monitora a altura do próximo cano para disparar pulos autônomos.
+
+#### Controles
+* **Bater asas / Pular**: Barra de Espaço (`K_SPACE`) ou Clique do mouse
+* **Reiniciar partida após colisão**: Tecla `R`
+* **Sair**: Tecla `ESC`
+
+#### Como rodar
+```bash
+cd flappy-bird
+python3 main.py
+```
+* **Flags disponíveis**:
+  * `--demo`: ativa piloto automático (`_auto_flap()`) e grava capturas da partida em `prints/`.
+
+#### Exercícios e extensões pedagógicas
+1. **Medalhas de mérito**: adicione uma tela de premiação com medalhas de bronze, prata, ouro e platina conforme a pontuação final.
+2. **Dificuldade adaptativa**: diminua gradualmente a abertura do vão (`VAO = 150`) e aumente a velocidade de rolagem à medida que o jogador acumula pontos.
+3. **Sistema de partículas de penas**: emita pequenas partículas brancas que giram e caem quando o pássaro colide com os obstáculos.
 
 ---
 
@@ -290,7 +287,46 @@ python3 space_invaders.py
 
 ---
 
-### 3.8. Tetris (`tetris`)
+### 3.8. Dino Runner (`dino-runner`)
+
+#### O que é
+Endless runner inspirado no dinossauro do Google Chrome, concebido para demonstrar como criar um jogo completo em um único arquivo Python sem dependências externas de imagens ou áudios: toda a pixel art, os glifos de texto e os bipes de áudio são gerados dinamicamente via código. Oferece dois temas visuais completos: Colorido (com parallax e ciclo dia/noite) e Clássico (Chrome Dino cinza `#535353` sobre fundo branco).
+
+#### O que ensina (conceitos reais no código)
+* **Física de pulo e queda rápida adaptativa**: gravidade base (`GRAVIDADE = 1800.0 px/s²`, `IMPULSO_PULO = -740.0 px/s`) com gravidade reforçada ao pressionar a tecla para baixo no ar (`GRAVIDADE_QUEDA_RAPIDA = 3600.0 px/s²`) para respostas rápidas.
+* **Hitboxes compostas e adaptativas por postura**: classe `Dinossauro` altera dinamicamente sua caixa de colisão entre postura ereta e agachada em `definir_abaixado()`, viabilizando a esquiva de pterodáctilos voando em meia altura.
+* **Cenário em Parallax e Ciclo Dia/Noite**: classe `CenarioDeserto` orquestra camadas de montanhas distantes, dunas médias e solo com velocidades proporcionais; interpolação gradual de paleta em `interpolar_cor()` simulando passagem de dia para noite a cada 700 pontos.
+* **Geração procedural com distanciamento seguro**: classe `GeradorObstaculos` instancia cactos solitários (`CactoSimples`), agrupamentos (`GrupoCactos`) e pterodáctilos (`Pterodactilo`) calculando intervalos baseados na velocidade progressiva (que sobe de 320 px/s até 620 px/s).
+* **Pixel art e renderização procedural em código**: função `criar_superficie_pixel_art()` converte matrizes de caracteres de texto em `pygame.Surface`, desenhando todas as animações do dinossauro, cactos e pterodáctilos.
+* **HUD pixelada com fonte customizada**: dicionário `GLIFOS_HUD_PIXEL` com matrizes 6×7 para desenhar a pontuação retrô (`HI 000000  000000`).
+* **Sintetizador de áudio procedural**: classe `SintetizadorAudio` gera ondas em memória para sons de pulo, alerta de centenas e batida.
+* **Persistência de recorde**: leitura e escrita resilientes de pontuação recorde em `recorde.json` com `pathlib.Path` e `json`.
+* **Sistema de partículas de poeira**: classe `ParticulaPoeira` simula tufos de areia sob os pés do dinossauro ao correr e aterrissar.
+
+#### Controles
+* **Pular**: Barra de Espaço (`K_SPACE`) ou Seta para Cima (`K_UP`)
+* **Agachar / Descer rápido no ar**: Seta para Baixo (`K_DOWN`)
+* **Alternar tema visual (Colorido / Clássico)**: Tecla `T` (`K_t`)
+* **Pausar / Retomar**: Teclas `P` ou `ESC`
+* **Reiniciar partida após Game Over**: `Espaço`, `Seta ↑`, `R` ou `Enter`
+
+#### Como rodar
+```bash
+cd dino-runner
+python3 main.py
+```
+* **Flags disponíveis**:
+  * `--demo`: executa piloto automático (< 12 s), demonstrando ambos os temas visuais e salvando 4 prints em `prints/` (`titulo.png`, `jogo.png`, `classico.png`, `gameover.png`).
+  * `--classico`: inicia o jogo diretamente no tema clássico monocromático.
+
+#### Exercícios e extensões pedagógicas
+1. **Condições climáticas**: adicione tempestades de areia procedurais periódicas com vento e partículas horizontais que afetem a visibilidade.
+2. **Novos obstáculos dinâmicos**: crie meteoros ou pedras que rolem pela pista em direções oblíquas.
+3. **Conquistas salvas em disco**: registre marcos de habilidade em `recorde.json` (ex: "Sobreviva 1000m sem pular", "Alcance 3000 pontos").
+
+---
+
+### 3.9. Tetris (`tetris`)
 
 #### O que é
 Implementação completa, colorida e moderna do clássico quebra-cabeça de empilhamento de blocos em grade de 10 colunas por 20 linhas. Possui rotação de matrizes, projeção fantasma (ghost piece), retenção de peça (HOLD), sintetizador de áudio chiptune procedural em memória, salvamento de recorde em JSON e compatibilidade com teclado, mouse e controles USB.
@@ -329,43 +365,6 @@ python3 tetris.py
 1. **Gerador de peças "7-Bag"**: substitua o sorteio puramente aleatório pelo algoritmo oficial de sacola, onde todas as 7 peças são sorteadas sem repetição antes de reiniciar a sacola.
 2. **Super Rotation System (SRS)**: implemente a tabela completa de 5 testes de deslocamento (offsets de wall-kick) para permitir giros em espaços apertados.
 3. **Animação de limpeza**: insira uma animação de piscar ou dissolver blocos durante a eliminação de linhas antes de efetuar o colapso do tabuleiro.
-
----
-
-### 3.9. Xadrez (`xadrez`)
-
-#### O que é
-Implementação integral do jogo de xadrez com visual inspirado no chess.com (tabuleiro creme e verde, rótulos A–H e 1–8), peças desenhadas puramente por polígonos vetoriais, motor com todas as regras da FIDE e motor de IA baseado em Minimax com poda Alfa-Beta.
-
-#### O que ensina (conceitos reais no código)
-* **Representação de tabuleiro e regras oficiais FIDE**: classes `@dataclass` `Lance` e `Estado`, tabuleiro matricial 8×8, geração de lances pseudolegais em `geradores_pseudo()` e filtragem estrita de lances legais em `legais()` garantindo que o próprio rei não permaneça sob ataque.
-* **Lances especiais**: Roque (maior e menor com checagem de casas atacadas no caminho em `roque`), captura En Passant (`ep`) com expiração em meio-lance e promoção automática a Dama (`promo`).
-* **Reconhecimento de xeque, mate e afogamento**: detecção em `em_xeque()` e `atualizar_status()` verificando se a lista de lances legais está vazia com ou sem o rei atacado.
-* **Inteligência Artificial (Minimax com Poda Alfa-Beta)**: função `minimax(est, depth, alpha, beta)` que avalia a árvore de decisões antecipando respostas do adversário, combinando contagem de material em `VALOR` com posicionamento estratégico em `avaliar()`.
-* **Validação formal do motor via Perft**: função `perft(est, depth) -> int` que percorre recursivamente todos os nós da árvore de lances legais, técnica padrão utilizada em motores profissionais de xadrez para certificar a exatidão das regras contra tabelas canônicas.
-* **Renderização vetorial com primitivas**: função `desenhar_peca()` desenha coroas, cruzes e cavalos combinando polígonos e círculos anti-aliasing sem necessidade de carregar imagens PNG externas.
-
-#### Controles
-* **Selecionar e mover peça**: Clique com o botão esquerdo do mouse na casa de origem e na casa de destino
-* **Modo 2 jogadores locais**: Tecla `1`
-* **Jogar de Brancas contra a IA**: Tecla `2`
-* **Jogar de Pretas contra a IA**: Tecla `3`
-* **Reiniciar partida**: Tecla `R`
-* **Sair**: Tecla `ESC`
-
-#### Como rodar
-```bash
-cd xadrez
-python3 main.py
-```
-* **Flags disponíveis**:
-  * `--demo`: executa partida autônoma de IA contra IA e salva capturas de tela em `prints/`.
-  * `--perft <profundidade>`: executa o teste de desempenho e contagem de nós até a profundidade informada (ex: `python3 main.py --perft 3`).
-
-#### Exercícios e extensões pedagógicas
-1. **Modal de promoção de peão**: abra uma janela de escolha para o usuário optar entre Dama, Torre, Bispo ou Cavalo na promoção de peões.
-2. **Tabela de transposição**: implemente um dicionário de estados visitados com hash Zobrist para evitar recalcular ramos idênticos da árvore no Minimax.
-3. **Relógio de xadrez**: adicione contadores de tempo decrescentes para cada cor com suporte a incremento por lance.
 
 ---
 
@@ -445,80 +444,44 @@ python3 main.py
 
 ---
 
-### 3.12. Flappy Bird (`flappy-bird`)
+### 3.12. Xadrez (`xadrez`)
 
 #### O que é
-Adaptação em tela vertical (`400×600`) do fenômeno Flappy Bird: um pássaro animado deve voar através de aberturas entre canos verdes com alturas aleatórias, sofrendo ação de gravidade contínua e rotação angular dinâmica.
+Implementação integral do jogo de xadrez com visual inspirado no chess.com (tabuleiro creme e verde, rótulos A–H e 1–8), peças desenhadas puramente por polígonos vetoriais, motor com todas as regras da FIDE e motor de IA baseado em Minimax com poda Alfa-Beta.
 
 #### O que ensina (conceitos reais no código)
-* **Gravidade newtoniana contínua e impulso**: a velocidade vertical é integrada a cada quadro em `atualizar()` por `bird_v += GRAVIDADE * (dt * 60)`, enquanto a função `flap()` zera a descida e aplica impulso ascendente instantâneo (`bird_v = FLAP_V = -8.0`).
-* **Atitude e rotação angular proporcional**: a orientação do sprite é calculada dinamicamente a partir da velocidade vertical (`self.angulo = min(35.0, max(-80.0, -self.bird_v * 5.0))`), apontando o bico para cima ao bater asas e mergulhando em direção ao solo em queda livre.
-* **Geração procedural e reciclagem de obstáculos**: classe `@dataclass Cano` modela obstáculos com centro do vão aleatório (`gap_y`), gerando retângulos independentes de colisão superior e inferior (`topo_rect` e `base_rect`) via `_novo_cano()`.
-* **Colisão AABB**: checagem de colisão da caixa envolvente do pássaro contra canos, teto e linha do solo em `bird_rect().colliderect()`.
-* **Ilusão de scroll e parallax**: deslocamento modular contínuo do chão em `self.chao_off = (self.chao_off + VEL_SCROLL * dt * 60) % 20`.
-* **Animação procedural de asas**: batimento orgânico de asas calculado por função senoidal em `self.asa`.
-* **Automação no modo demo**: método `_auto_flap()` monitora a altura do próximo cano para disparar pulos autônomos.
+* **Representação de tabuleiro e regras oficiais FIDE**: classes `@dataclass` `Lance` e `Estado`, tabuleiro matricial 8×8, geração de lances pseudolegais em `geradores_pseudo()` e filtragem estrita de lances legais em `legais()` garantindo que o próprio rei não permaneça sob ataque.
+* **Lances especiais**: Roque (maior e menor com checagem de casas atacadas no caminho em `roque`), captura En Passant (`ep`) com expiração em meio-lance e promoção automática a Dama (`promo`).
+* **Reconhecimento de xeque, mate e afogamento**: detecção em `em_xeque()` e `atualizar_status()` verificando se a lista de lances legais está vazia com ou sem o rei atacado.
+* **Inteligência Artificial (Minimax com Poda Alfa-Beta)**: função `minimax(est, depth, alpha, beta)` que avalia a árvore de decisões antecipando respostas do adversário, combinando contagem de material em `VALOR` com posicionamento estratégico em `avaliar()`.
+* **Validação formal do motor via Perft**: função `perft(est, depth) -> int` que percorre recursivamente todos os nós da árvore de lances legais, técnica padrão utilizada em motores profissionais de xadrez para certificar a exatidão das regras contra tabelas canônicas.
+* **Renderização vetorial com primitivas**: função `desenhar_peca()` desenha coroas, cruzes e cavalos combinando polígonos e círculos anti-aliasing sem necessidade de carregar imagens PNG externas.
 
 #### Controles
-* **Bater asas / Pular**: Barra de Espaço (`K_SPACE`) ou Clique do mouse
-* **Reiniciar partida após colisão**: Tecla `R`
+* **Selecionar e mover peça**: Clique com o botão esquerdo do mouse na casa de origem e na casa de destino
+* **Modo 2 jogadores locais**: Tecla `1`
+* **Jogar de Brancas contra a IA**: Tecla `2`
+* **Jogar de Pretas contra a IA**: Tecla `3`
+* **Reiniciar partida**: Tecla `R`
 * **Sair**: Tecla `ESC`
 
 #### Como rodar
 ```bash
-cd flappy-bird
+cd xadrez
 python3 main.py
 ```
 * **Flags disponíveis**:
-  * `--demo`: ativa piloto automático (`_auto_flap()`) e grava capturas da partida em `prints/`.
+  * `--demo`: executa partida autônoma de IA contra IA e salva capturas de tela em `prints/`.
+  * `--perft <profundidade>`: executa o teste de desempenho e contagem de nós até a profundidade informada (ex: `python3 main.py --perft 3`).
 
 #### Exercícios e extensões pedagógicas
-1. **Medalhas de mérito**: adicione uma tela de premiação com medalhas de bronze, prata, ouro e platina conforme a pontuação final.
-2. **Dificuldade adaptativa**: diminua gradualmente a abertura do vão (`VAO = 150`) e aumente a velocidade de rolagem à medida que o jogador acumula pontos.
-3. **Sistema de partículas de penas**: emita pequenas partículas brancas que giram e caem quando o pássaro colide com os obstáculos.
+1. **Modal de promoção de peão**: abra uma janela de escolha para o usuário optar entre Dama, Torre, Bispo ou Cavalo na promoção de peões.
+2. **Tabela de transposição**: implemente um dicionário de estados visitados com hash Zobrist para evitar recalcular ramos idênticos da árvore no Minimax.
+3. **Relógio de xadrez**: adicione contadores de tempo decrescentes para cada cor com suporte a incremento por lance.
 
 ---
 
-### 3.13. Dino Runner (`dino-runner`)
-
-#### O que é
-Endless runner inspirado no dinossauro do Google Chrome, concebido para demonstrar como criar um jogo completo em um único arquivo Python sem dependências externas de imagens ou áudios: toda a pixel art, os glifos de texto e os bipes de áudio são gerados dinamicamente via código. Oferece dois temas visuais completos: Colorido (com parallax e ciclo dia/noite) e Clássico (Chrome Dino cinza `#535353` sobre fundo branco).
-
-#### O que ensina (conceitos reais no código)
-* **Física de pulo e queda rápida adaptativa**: gravidade base (`GRAVIDADE = 1800.0 px/s²`, `IMPULSO_PULO = -740.0 px/s`) com gravidade reforçada ao pressionar a tecla para baixo no ar (`GRAVIDADE_QUEDA_RAPIDA = 3600.0 px/s²`) para respostas rápidas.
-* **Hitboxes compostas e adaptativas por postura**: classe `Dinossauro` altera dinamicamente sua caixa de colisão entre postura ereta e agachada em `definir_abaixado()`, viabilizando a esquiva de pterodáctilos voando em meia altura.
-* **Cenário em Parallax e Ciclo Dia/Noite**: classe `CenarioDeserto` orquestra camadas de montanhas distantes, dunas médias e solo com velocidades proporcionais; interpolação gradual de paleta em `interpolar_cor()` simulando passagem de dia para noite a cada 700 pontos.
-* **Geração procedural com distanciamento seguro**: classe `GeradorObstaculos` instancia cactos solitários (`CactoSimples`), agrupamentos (`GrupoCactos`) e pterodáctilos (`Pterodactilo`) calculando intervalos baseados na velocidade progressiva (que sobe de 320 px/s até 620 px/s).
-* **Pixel art e renderização procedural em código**: função `criar_superficie_pixel_art()` converte matrizes de caracteres de texto em `pygame.Surface`, desenhando todas as animações do dinossauro, cactos e pterodáctilos.
-* **HUD pixelada com fonte customizada**: dicionário `GLIFOS_HUD_PIXEL` com matrizes 6×7 para desenhar a pontuação retrô (`HI 000000  000000`).
-* **Sintetizador de áudio procedural**: classe `SintetizadorAudio` gera ondas em memória para sons de pulo, alerta de centenas e batida.
-* **Persistência de recorde**: leitura e escrita resilientes de pontuação recorde em `recorde.json` com `pathlib.Path` e `json`.
-* **Sistema de partículas de poeira**: classe `ParticulaPoeira` simula tufos de areia sob os pés do dinossauro ao correr e aterrissar.
-
-#### Controles
-* **Pular**: Barra de Espaço (`K_SPACE`) ou Seta para Cima (`K_UP`)
-* **Agachar / Descer rápido no ar**: Seta para Baixo (`K_DOWN`)
-* **Alternar tema visual (Colorido / Clássico)**: Tecla `T` (`K_t`)
-* **Pausar / Retomar**: Teclas `P` ou `ESC`
-* **Reiniciar partida após Game Over**: `Espaço`, `Seta ↑`, `R` ou `Enter`
-
-#### Como rodar
-```bash
-cd dino-runner
-python3 main.py
-```
-* **Flags disponíveis**:
-  * `--demo`: executa piloto automático (< 12 s), demonstrando ambos os temas visuais e salvando 4 prints em `prints/` (`titulo.png`, `jogo.png`, `classico.png`, `gameover.png`).
-  * `--classico`: inicia o jogo diretamente no tema clássico monocromático.
-
-#### Exercícios e extensões pedagógicas
-1. **Condições climáticas**: adicione tempestades de areia procedurais periódicas com vento e partículas horizontais que afetem a visibilidade.
-2. **Novos obstáculos dinâmicos**: crie meteoros ou pedras que rolem pela pista em direções oblíquas.
-3. **Conquistas salvas em disco**: registre marcos de habilidade em `recorde.json` (ex: "Sobreviva 1000m sem pular", "Alcance 3000 pontos").
-
----
-
-### 3.14. Egg Game: De Volta ao Ninho (`egg-game`)
+### 3.13. Egg Game: De Volta ao Ninho (`egg-game`)
 
 #### O que é
 Jogo de aventura vertical em formato retrato (`720×1280`, proporção `9:16`). O jogador ajuda um ovo a saltar de cesta em cesta ao longo de uma árvore até alcançar o ninho familiar a 120 metros de altitude. A mecânica central é deliberadamente minimalista: **o jogador só tem um controle: pular** — o ovo não possui movimentação horizontal própria; todo o alinhamento espacial decorre do cálculo do momento exato em que as cestas móveis se cruzam.
@@ -577,9 +540,8 @@ flowchart TD
     H --> I["9. Tetris<br/>(Matrizes, Rotação, Peça Fantasma, Síntese Chiptune PCM)"]
     I --> J["10. Sudoku<br/>(Recursão, Backtracking com Poda, Prova de Unicidade)"]
     J --> K["11. Pac-Man<br/>(Grid por Tiles, IAs Clássicas com FSM, BFS)"]
-    K --> L["12. Corrida de Espermatozoides<br/>(Projeção Pseudo-3D OutRun, FOV, Matemática Senoidal)"]
-    L --> M["13. Xadrez<br/>(Regras FIDE, Minimax com Poda Alfa-Beta, Perft)"]
-    M --> N["14. Egg Game<br/>(Arquitetura de Produção Desacoplada, Passo Fixo, Pytest)"]
+    K --> L["12. Xadrez<br/>(Regras FIDE, Minimax com Poda Alfa-Beta, Perft)"]
+    L --> M["13. Egg Game<br/>(Arquitetura de Produção Desacoplada, Passo Fixo, Pytest)"]
 ```
 
 1. **Snake**: fundação do game loop, controle de taxa de quadros, eventos de teclado e representação de entidades em grade discreta usando listas como filas.
@@ -593,9 +555,8 @@ flowchart TD
 9. **Tetris**: computação matricial 2D, transformações lineares para rotação de peças, projeção de queda futura ("ghost piece"), delayed auto-shift (DAS) e síntese de áudio chiptune PCM em memória.
 10. **Sudoku**: algoritmos clássicos de recursão e backtracking com poda, matrizes 9×9 e garantia matemática de unicidade de solução por contagem exaustiva.
 11. **Pac-Man**: estruturas de dados para labirintos em tiles, pathfinding em encruzilhadas, inteligências relacionais com personalidades distintas e máquinas de estados finitos (FSM).
-12. **Corrida de Espermatozoides**: matemática trigonométrica, curvas procedurais, FOV dinâmico e projeção pseudo-3D retro no estilo clássico OutRun.
-13. **Xadrez**: modelagem de regras complexas da FIDE (roque, en passant, promoção), teoria dos jogos com algoritmo Minimax, poda Alfa-Beta e validação formal de motor com perft.
-14. **Egg Game**: engenharia de software e padrões de produção profissional: separação completa entre núcleo e apresentação, simulação em passo fixo (fixed timestep), colisão one-way e testes automatizados com `pytest`.
+12. **Xadrez**: modelagem de regras complexas da FIDE (roque, en passant, promoção), teoria dos jogos com algoritmo Minimax, poda Alfa-Beta e validação formal de motor com perft.
+13. **Egg Game**: engenharia de software e padrões de produção profissional: separação completa entre núcleo e apresentação, simulação em passo fixo (fixed timestep), colisão one-way e testes automatizados com `pytest`.
 
 
 ---
@@ -614,10 +575,10 @@ SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy timeout 5 python3 <arquivo_de_entrad
 
 ### Bateria completa de testes em lote
 
-Execute o script bash abaixo para checar automaticamente todos os 14 jogos da coleção:
+Execute o script bash abaixo para checar automaticamente todos os 13 jogos da coleção:
 
 ```bash
-for d in snake pong squash-arcade genius-musical breakout flappy-bird space-invaders dino-runner tetris sudoku pac-man corrida-esperma xadrez egg-game; do
+for d in snake pong squash-arcade genius-musical breakout flappy-bird space-invaders dino-runner tetris sudoku pac-man xadrez egg-game; do
   entry="main.py"
   if [ "$d" = "snake" ]; then entry="snake_completo.py"; fi
   if [ "$d" = "pong" ]; then entry="pong.py"; fi
