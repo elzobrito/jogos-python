@@ -1,6 +1,6 @@
 # Jogos Educativos em Python (Pygame-CE)
 
-Coleção de 13 jogos didáticos desenvolvidos em **Python 3** com a biblioteca **pygame-ce** (Community Edition), concebidos como material de apoio pedagógico para o ensino de programação, estruturas de dados, algoritmos, matemática para jogos e arquitetura de software.
+Coleção de 14 jogos didáticos desenvolvidos em **Python 3** com a biblioteca **pygame-ce** (Community Edition), concebidos como material de apoio pedagógico para o ensino de programação, estruturas de dados, algoritmos, matemática para jogos e arquitetura de software.
 
 Cada projeto foi desenhado para expor conceitos essenciais de desenvolvimento de software em código legível, didático e pronto para execução e modificação pelos estudantes em sala de aula ou laboratório.
 
@@ -35,16 +35,18 @@ A saída esperada deve exibir a versão do pygame-ce (ex.: `2.5.8` ou superior).
 | **Snake** | Iniciante | Game loop, grid discreto, listas/filas, colisão de borda/corpo | `cd snake && python3 snake_completo.py` | [roteiro](snake/docs/roteiro.md) · [partes](snake/partes/) |
 | **Pong** | Iniciante | Delta time, física contínua, reflexão vetorial, colisão AABB, IA reativa | `cd pong && python3 pong.py` | [roteiro](pong/docs/roteiro.md) · [partes](pong/partes/) |
 | **Squash Arcade** | Iniciante / Intermediário | Efeitos sonoros com `pygame.mixer` (`pre_init`, `Sound` com WAVs de `sons/`, canais `Channel` e volume por canal, mudo com `M`), delta time, ângulo de rebatida proporcional | `cd squash-arcade && python3 squash.py` | [roteiro](squash-arcade/docs/roteiro.md) · [partes](squash-arcade/partes/) |
+| **Genius Musical** | Iniciante / Intermediário | Sprites PNG (`image.load`, `convert_alpha`, `smoothscale`, `blit`), retângulos clicáveis, síntese PCM senoidal com `array('h')` e envelope, máquina de estados com `dt` | `cd genius-musical && python3 main.py` | em breve |
 | **Breakout** | Iniciante / Intermediário | Resolução AABB por menor sobreposição, desvio angular, lista de entidades | `cd breakout && python3 breakout.py` | [roteiro](breakout/docs/roteiro.md) · [partes](breakout/partes/) |
-| **Space Invaders** | Intermediário | Classes/OOP, movimento de enxame sincronizado, cooldown, escudos destrutíveis | `cd space-invaders && python3 space_invaders.py` | — |
 | **Flappy Bird** | Intermediário | Gravidade contínua, impulso vertical, rotação angular, reciclagem de canos, parallax | `cd flappy-bird && python3 main.py` | — |
+| **Space Invaders** | Intermediário | Classes/OOP, movimento de enxame sincronizado, cooldown, escudos destrutíveis | `cd space-invaders && python3 space_invaders.py` | — |
 | **Dino Runner** | Intermediário | Endless runner, hitboxes dinâmicas (agachar), pixel art e áudio procedurais, JSON | `cd dino-runner && python3 main.py` | — |
-| **Corrida de Espermatozoides** | Intermediário | Projeção pseudo-3D (OutRun), FOV dinâmico, animação senoidal, colisão 1.5D | `cd corrida-esperma && python3 main.py` | — |
 | **Tetris** | Intermediário / Avançado | Matrizes, rotação de blocos, ghost piece, retenção (HOLD), sintetizador chiptune PCM | `cd tetris && python3 tetris.py` | — |
-| **Pac-Man** | Avançado | Grid por tiles, encruzilhadas, 4 IAs originais (Chase/Scatter/Frightened), BFS | `cd pac-man && python3 main.py` | — |
 | **Sudoku** | Avançado | Recursão e backtracking, matriz 9×9, prova de unicidade de solução, dicas | `cd sudoku && python3 main.py` | — |
+| **Pac-Man** | Avançado | Grid por tiles, encruzilhadas, 4 IAs originais (Chase/Scatter/Frightened), BFS | `cd pac-man && python3 main.py` | — |
+| **Corrida de Espermatozoides** | Intermediário | Projeção pseudo-3D (OutRun), FOV dinâmico, animação senoidal, colisão 1.5D | `cd corrida-esperma && python3 main.py` | — |
 | **Xadrez** | Avançado | Regras FIDE (roque, en passant, promoção), Minimax com poda Alfa-Beta, perft | `cd xadrez && python3 main.py` | — |
 | **Egg Game** | Avançado | Arquitetura modular desacoplada, passo fixo (fixed timestep), one-way collision, testes pytest | `cd egg-game && python3 main.py` | — |
+
 
 ---
 
@@ -192,7 +194,39 @@ python3 squash.py
 
 ---
 
-### 3.5. Breakout (`breakout`)
+### 3.5. Genius Musical (`genius-musical`)
+
+#### O que é
+Jogo de memória audiovisual inspirado no *Simon*: quatro elementos flat (Fogo, Água, Terra e Ar) formam uma sequência crescente de notas. O jogo demonstra a sequência iluminando cada cartão e tocando a frequência correspondente; o jogador deve repeti-la com o mouse ou as teclas 1–4. Introduz **carregamento de sprites PNG** e **síntese sonora por senoide PCM**, após Squash Arcade (áudio via WAV) e antes de Breakout.
+
+#### O que ensina (conceitos reais no código)
+* **Carregamento de imagens com transparência**: `pygame.image.load(...).convert_alpha()`, redimensionamento com `pygame.transform.smoothscale()` e composição via `Surface.blit()` dos ícones flat sobre cartões desenhados com `pygame.draw.rect`.
+* **Regiões clicáveis**: retângulos distintos em grade 2×2; clique e teclas 1–4 percorrem a mesma rotina `selecionar(elemento)`.
+* **Síntese PCM de senoides**: geração em memória com `math.sin`, `array('h')` e envelope de ataque/liberação; reprodução com `pygame.mixer.Sound(buffer=...)` após `mixer.pre_init` antes de `pygame.init()`.
+* **Máquina de estados com `dt`**: estados `MENU → DEMONSTRANDO → ENTRADA → FEEDBACK → DEMONSTRANDO` (erro → `FIM`; `PAUSADO` preserva cronômetros); timers sem `time.sleep()`.
+* **Sequência acumulativa**: a lista de notas cresce em uma unidade por rodada vencida, sem regenerar o prefixo.
+
+#### Controles
+* **Selecionar elemento**: clique no cartão ou teclas `1` (Fogo), `2` (Água), `3` (Terra), `4` (Ar)
+* **Iniciar / reiniciar**: `Enter`
+* **Pausar / retomar**: `P` ou `Esc`
+* **Ligar/desligar som**: `M`
+
+#### Como rodar
+```bash
+cd genius-musical
+python3 main.py
+```
+> Mantenha a pasta `assets/imagens/` ao lado de `main.py`. Testes: `pytest testes/`.
+
+#### Exercícios e extensões pedagógicas
+1. **Modo só visual / só auditivo**: durante a demonstração, omita o som ou o destaque visual e compare a dificuldade.
+2. **Timbre alternativo**: gere buffers com onda quadrada ou triangular (mesma frequência) e alterne com uma tecla.
+3. **Escala de sete notas**: amplie de quatro elementos para a escala diatônica completa, ajustando grade e rótulos.
+
+---
+
+### 3.6. Breakout (`breakout`)
 
 > 🎬 **Aula em vídeo:** roteiro falado em [`breakout/docs/roteiro.md`](breakout/docs/roteiro.md) e código passo a passo (5 partes executáveis) em [`breakout/partes/`](breakout/partes/).
 
@@ -223,7 +257,7 @@ python3 breakout.py
 
 ---
 
-### 3.6. Space Invaders (`space-invaders`)
+### 3.7. Space Invaders (`space-invaders`)
 
 #### O que é
 Adaptação do clássico shooter espacial arcade: o jogador controla um canhão terrestre na base, dispara contra uma formação de invasores alienígenas que descem em bloco ritmado e busca abrigo atrás de bunkers defensivos destrutíveis.
@@ -254,7 +288,7 @@ python3 space_invaders.py
 
 ---
 
-### 3.7. Tetris (`tetris`)
+### 3.8. Tetris (`tetris`)
 
 #### O que é
 Implementação completa, colorida e moderna do clássico quebra-cabeça de empilhamento de blocos em grade de 10 colunas por 20 linhas. Possui rotação de matrizes, projeção fantasma (ghost piece), retenção de peça (HOLD), sintetizador de áudio chiptune procedural em memória, salvamento de recorde em JSON e compatibilidade com teclado, mouse e controles USB.
@@ -296,7 +330,7 @@ python3 tetris.py
 
 ---
 
-### 3.8. Xadrez (`xadrez`)
+### 3.9. Xadrez (`xadrez`)
 
 #### O que é
 Implementação integral do jogo de xadrez com visual inspirado no chess.com (tabuleiro creme e verde, rótulos A–H e 1–8), peças desenhadas puramente por polígonos vetoriais, motor com todas as regras da FIDE e motor de IA baseado em Minimax com poda Alfa-Beta.
@@ -333,7 +367,7 @@ python3 main.py
 
 ---
 
-### 3.9. Sudoku (`sudoku`)
+### 3.10. Sudoku (`sudoku`)
 
 #### O que é
 Jogo de raciocínio numérico clássico em grade 9×9 dividida em 9 blocos 3×3, contendo gerador que assegura solução matematicamente única, 3 níveis de dificuldade, destaque visual de regras e conflitos em tempo real, sistema de dicas e resolução automática animada.
@@ -372,7 +406,7 @@ python3 main.py
 
 ---
 
-### 3.10. Pac-Man (`pac-man`)
+### 3.11. Pac-Man (`pac-man`)
 
 #### O que é
 Clone do consagrado arcade Pac-Man: o jogador navega por um labirinto consumindo bolinhas e pastilhas de força, cruza túneis laterais e enfrenta os 4 fantasmas com suas personalidades, inteligências artificiais e máquinas de estados originais.
@@ -409,7 +443,7 @@ python3 main.py
 
 ---
 
-### 3.11. Flappy Bird (`flappy-bird`)
+### 3.12. Flappy Bird (`flappy-bird`)
 
 #### O que é
 Adaptação em tela vertical (`400×600`) do fenômeno Flappy Bird: um pássaro animado deve voar através de aberturas entre canos verdes com alturas aleatórias, sofrendo ação de gravidade contínua e rotação angular dinâmica.
@@ -443,7 +477,7 @@ python3 main.py
 
 ---
 
-### 3.12. Dino Runner (`dino-runner`)
+### 3.13. Dino Runner (`dino-runner`)
 
 #### O que é
 Endless runner inspirado no dinossauro do Google Chrome, concebido para demonstrar como criar um jogo completo em um único arquivo Python sem dependências externas de imagens ou áudios: toda a pixel art, os glifos de texto e os bipes de áudio são gerados dinamicamente via código. Oferece dois temas visuais completos: Colorido (com parallax e ciclo dia/noite) e Clássico (Chrome Dino cinza `#535353` sobre fundo branco).
@@ -482,7 +516,7 @@ python3 main.py
 
 ---
 
-### 3.13. Egg Game: De Volta ao Ninho (`egg-game`)
+### 3.14. Egg Game: De Volta ao Ninho (`egg-game`)
 
 #### O que é
 Jogo de aventura vertical em formato retrato (`720×1280`, proporção `9:16`). O jogador ajuda um ovo a saltar de cesta em cesta ao longo de uma árvore até alcançar o ninho familiar a 120 metros de altitude. A mecânica central é deliberadamente minimalista: **o jogador só tem um controle: pular** — o ovo não possui movimentação horizontal própria; todo o alinhamento espacial decorre do cálculo do momento exato em que as cestas móveis se cruzam.
@@ -533,31 +567,34 @@ Para turmas de programação, desenvolvimento de jogos ou usabilidade, recomenda
 flowchart TD
     A["1. Snake<br/>(Game Loop, Grade Discreta, Listas/Filas)"] --> B["2. Pong<br/>(Delta Time, Precisão Sub-pixel, Colisão AABB)"]
     B --> C["3. Squash Arcade<br/>(pygame.mixer, Sound WAV, Canais e Volume)"]
-    C --> D["4. Breakout<br/>(Resolução AABB, Ângulos Vetoriais, Coleções de Entidades)"]
-    D --> E["5. Flappy Bird<br/>(Gravidade Acumulada, Rotação Proporcional, Parallax)"]
-    E --> F["6. Space Invaders<br/>(Classes/OOP, Movimento de Enxame, Cooldown)"]
-    F --> G["7. Dino Runner<br/>(Hitboxes Adaptativas, Pixel Art Procedural, JSON)"]
-    G --> H["8. Tetris<br/>(Matrizes, Rotação, Peça Fantasma, Síntese Chiptune PCM)"]
-    H --> I["9. Sudoku<br/>(Recursão, Backtracking com Poda, Prova de Unicidade)"]
-    I --> J["10. Pac-Man<br/>(Grid por Tiles, IAs Clássicas com FSM, BFS)"]
-    J --> K["11. Corrida de Espermatozoides<br/>(Projeção Pseudo-3D OutRun, FOV, Matemática Senoidal)"]
-    K --> L["12. Xadrez<br/>(Regras FIDE, Minimax com Poda Alfa-Beta, Perft)"]
-    L --> M["13. Egg Game<br/>(Arquitetura de Produção Desacoplada, Passo Fixo, Pytest)"]
+    C --> D["4. Genius Musical<br/>(Sprites PNG, Síntese PCM Senoidal, FSM)"]
+    D --> E["5. Breakout<br/>(Resolução AABB, Ângulos Vetoriais, Coleções de Entidades)"]
+    E --> F["6. Flappy Bird<br/>(Gravidade Acumulada, Rotação Proporcional, Parallax)"]
+    F --> G["7. Space Invaders<br/>(Classes/OOP, Movimento de Enxame, Cooldown)"]
+    G --> H["8. Dino Runner<br/>(Hitboxes Adaptativas, Pixel Art Procedural, JSON)"]
+    H --> I["9. Tetris<br/>(Matrizes, Rotação, Peça Fantasma, Síntese Chiptune PCM)"]
+    I --> J["10. Sudoku<br/>(Recursão, Backtracking com Poda, Prova de Unicidade)"]
+    J --> K["11. Pac-Man<br/>(Grid por Tiles, IAs Clássicas com FSM, BFS)"]
+    K --> L["12. Corrida de Espermatozoides<br/>(Projeção Pseudo-3D OutRun, FOV, Matemática Senoidal)"]
+    L --> M["13. Xadrez<br/>(Regras FIDE, Minimax com Poda Alfa-Beta, Perft)"]
+    M --> N["14. Egg Game<br/>(Arquitetura de Produção Desacoplada, Passo Fixo, Pytest)"]
 ```
 
 1. **Snake**: fundação do game loop, controle de taxa de quadros, eventos de teclado e representação de entidades em grade discreta usando listas como filas.
 2. **Pong**: transição da grade discreta para física contínua no tempo (`dt`), vetores de velocidade, reflexão elástica e IA reativa simplificada.
 3. **Squash Arcade**: mesma física contínua do Pong, agora com áudio: `pygame.mixer.pre_init`, efeitos `pygame.mixer.Sound` carregados de arquivos WAV, canais dedicados com volume próprio e opção de mudo — sem travar o game loop.
-4. **Breakout**: resolução avançada de colisões AABB (distinção entre bordas verticais e horizontais), rebatidas com conservação escalar e listas de blocos com estados de durabilidade.
-5. **Flappy Bird**: aceleração gravitacional acumulada, cálculo de atitude angular por velocidade vertical, geração procedural infinita e efeito de parallax no solo.
-6. **Space Invaders**: programação orientada a objetos (OOP), sincronização de enxame de inimigos, cadência de disparos (cooldown) e gerenciamento seguro de coleções dinâmicas de tiros.
-7. **Dino Runner**: criação de jogos autossuficientes sem assets externos (pixel art e áudio procedural em código puro), hitboxes compostas para agachar e persistência de dados em JSON.
-8. **Tetris**: computação matricial 2D, transformações lineares para rotação de peças, projeção de queda futura ("ghost piece"), delayed auto-shift (DAS) e síntese de áudio chiptune PCM em memória.
-9. **Sudoku**: algoritmos clássicos de recursão e backtracking com poda, matrizes 9×9 e garantia matemática de unicidade de solução por contagem exaustiva.
-10. **Pac-Man**: estruturas de dados para labirintos em tiles, pathfinding em encruzilhadas, inteligências relacionais com personalidades distintas e máquinas de estados finitos (FSM).
-11. **Corrida de Espermatozoides**: matemática trigonométrica, curvas procedurais, FOV dinâmico e projeção pseudo-3D retro no estilo clássico OutRun.
-12. **Xadrez**: modelagem de regras complexas da FIDE (roque, en passant, promoção), teoria dos jogos com algoritmo Minimax, poda Alfa-Beta e validação formal de motor com perft.
-13. **Egg Game**: engenharia de software e padrões de produção profissional: separação completa entre núcleo e apresentação, simulação em passo fixo (fixed timestep), colisão one-way e testes automatizados com `pytest`.
+4. **Genius Musical**: sprites PNG com transparência (`load`/`convert_alpha`/`smoothscale`/`blit`), retângulos clicáveis em grade 2×2 e síntese de notas por senoide PCM em memória (`array('h')` + envelope), sincronizada a uma máquina de estados com `dt`.
+5. **Breakout**: resolução avançada de colisões AABB (distinção entre bordas verticais e horizontais), rebatidas com conservação escalar e listas de blocos com estados de durabilidade.
+6. **Flappy Bird**: aceleração gravitacional acumulada, cálculo de atitude angular por velocidade vertical, geração procedural infinita e efeito de parallax no solo.
+7. **Space Invaders**: programação orientada a objetos (OOP), sincronização de enxame de inimigos, cadência de disparos (cooldown) e gerenciamento seguro de coleções dinâmicas de tiros.
+8. **Dino Runner**: criação de jogos autossuficientes sem assets externos (pixel art e áudio procedural em código puro), hitboxes compostas para agachar e persistência de dados em JSON.
+9. **Tetris**: computação matricial 2D, transformações lineares para rotação de peças, projeção de queda futura ("ghost piece"), delayed auto-shift (DAS) e síntese de áudio chiptune PCM em memória.
+10. **Sudoku**: algoritmos clássicos de recursão e backtracking com poda, matrizes 9×9 e garantia matemática de unicidade de solução por contagem exaustiva.
+11. **Pac-Man**: estruturas de dados para labirintos em tiles, pathfinding em encruzilhadas, inteligências relacionais com personalidades distintas e máquinas de estados finitos (FSM).
+12. **Corrida de Espermatozoides**: matemática trigonométrica, curvas procedurais, FOV dinâmico e projeção pseudo-3D retro no estilo clássico OutRun.
+13. **Xadrez**: modelagem de regras complexas da FIDE (roque, en passant, promoção), teoria dos jogos com algoritmo Minimax, poda Alfa-Beta e validação formal de motor com perft.
+14. **Egg Game**: engenharia de software e padrões de produção profissional: separação completa entre núcleo e apresentação, simulação em passo fixo (fixed timestep), colisão one-way e testes automatizados com `pytest`.
+
 
 ---
 
@@ -575,10 +612,10 @@ SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy timeout 5 python3 <arquivo_de_entrad
 
 ### Bateria completa de testes em lote
 
-Execute o script bash abaixo para checar automaticamente todos os 13 jogos da coleção:
+Execute o script bash abaixo para checar automaticamente todos os 14 jogos da coleção:
 
 ```bash
-for d in corrida-esperma snake pong squash-arcade breakout space-invaders tetris xadrez sudoku pac-man flappy-bird dino-runner egg-game; do
+for d in snake pong squash-arcade genius-musical breakout flappy-bird space-invaders dino-runner tetris sudoku pac-man corrida-esperma xadrez egg-game; do
   entry="main.py"
   if [ "$d" = "snake" ]; then entry="snake_completo.py"; fi
   if [ "$d" = "pong" ]; then entry="pong.py"; fi
