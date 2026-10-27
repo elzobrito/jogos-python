@@ -23,6 +23,18 @@ python squash.py
 
 Impeça a bola de atravessar o piso. Cada rebatida na raquete soma **10 pontos**. A cada cinco rebatidas, são concedidos **25 pontos extras**. Você dispõe de três vidas. A bola acelera após cada rebatida.
 
+## Aula em vídeo
+
+A aula em vídeo constrói o jogo do zero em 5 partes. Roteiro falado: [docs/roteiro.md](docs/roteiro.md).
+
+## Partes da aula
+
+- **parte-01-quadra-raquete** — `cd partes/parte-01-quadra-raquete && python3 main.py`
+- **parte-02-bola-rebatidas** — `cd partes/parte-02-bola-rebatidas && python3 main.py`
+- **parte-03-primeiro-som** — `cd partes/parte-03-primeiro-som && python3 main.py`
+- **parte-04-canais-mute** — `cd partes/parte-04-canais-mute && python3 main.py`
+- **parte-05-vidas-bonus** — `cd partes/parte-05-vidas-bonus && python3 main.py`
+
 ## Objetivos pedagógicos
 
 1. **Revisão de Pong:** `dt`, velocidade em pixels/segundo, reflexão, leitura de teclado.

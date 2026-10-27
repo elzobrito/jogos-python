@@ -34,7 +34,7 @@ A saída esperada deve exibir a versão do pygame-ce (ex.: `2.5.8` ou superior).
 |---|---|---|---|---|
 | **Snake** | Iniciante | Game loop, grid discreto, listas/filas, colisão de borda/corpo | `cd snake && python3 snake_completo.py` | [roteiro](snake/docs/roteiro.md) · [partes](snake/partes/) |
 | **Pong** | Iniciante | Delta time, física contínua, reflexão vetorial, colisão AABB, IA reativa | `cd pong && python3 pong.py` | [roteiro](pong/docs/roteiro.md) · [partes](pong/partes/) |
-| **Squash Arcade** | Iniciante / Intermediário | Efeitos sonoros com `pygame.mixer` (`pre_init`, `Sound` com WAVs de `sons/`, canais `Channel` e volume por canal, mudo com `M`), delta time, ângulo de rebatida proporcional | `cd squash-arcade && python3 squash.py` | — |
+| **Squash Arcade** | Iniciante / Intermediário | Efeitos sonoros com `pygame.mixer` (`pre_init`, `Sound` com WAVs de `sons/`, canais `Channel` e volume por canal, mudo com `M`), delta time, ângulo de rebatida proporcional | `cd squash-arcade && python3 squash.py` | [roteiro](squash-arcade/docs/roteiro.md) · [partes](squash-arcade/partes/) |
 | **Breakout** | Iniciante / Intermediário | Resolução AABB por menor sobreposição, desvio angular, lista de entidades | `cd breakout && python3 breakout.py` | [roteiro](breakout/docs/roteiro.md) · [partes](breakout/partes/) |
 | **Space Invaders** | Intermediário | Classes/OOP, movimento de enxame sincronizado, cooldown, escudos destrutíveis | `cd space-invaders && python3 space_invaders.py` | — |
 | **Flappy Bird** | Intermediário | Gravidade contínua, impulso vertical, rotação angular, reciclagem de canos, parallax | `cd flappy-bird && python3 main.py` | — |
@@ -157,6 +157,8 @@ python3 pong.py
 ---
 
 ### 3.4. Squash Arcade (`squash-arcade`)
+
+> 🎬 **Aula em vídeo:** roteiro falado em [`squash-arcade/docs/roteiro.md`](squash-arcade/docs/roteiro.md) e código passo a passo (5 partes executáveis) em [`squash-arcade/partes/`](squash-arcade/partes/).
 
 #### O que é
 Variação para um jogador do Pong em uma quadra fechada: a bola rebate nas paredes laterais e no teto, e o jogador controla uma raquete inferior para impedir que ela atravesse o piso. Cada rebatida vale 10 pontos (com bônus de 25 a cada cinco rebatidas) e há 3 vidas. Serve de ponte entre Pong e Breakout, com foco em **adicionar som ao jogo**.
@@ -612,4 +614,5 @@ O foco central é didático: todos os códigos priorizam a legibilidade, a demon
 
 - **Snake** — código passo a passo em [`snake/partes/`](snake/partes/) e roteiro falado em [`snake/docs/roteiro.md`](snake/docs/roteiro.md).
 - **Pong** — código passo a passo em [`pong/partes/`](pong/partes/) e roteiro falado em [`pong/docs/roteiro.md`](pong/docs/roteiro.md).
+- **Squash Arcade** — código passo a passo em [`squash-arcade/partes/`](squash-arcade/partes/) e roteiro falado em [`squash-arcade/docs/roteiro.md`](squash-arcade/docs/roteiro.md).
 - **Breakout** — código passo a passo em [`breakout/partes/`](breakout/partes/) e roteiro falado em [`breakout/docs/roteiro.md`](breakout/docs/roteiro.md).
