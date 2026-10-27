@@ -44,6 +44,20 @@ Este projeto foi desenhado como material didático prático após os projetos *P
 
 ---
 
+## 🎬 Aula em vídeo
+
+- Roteiro falado: [`docs/roteiro.md`](docs/roteiro.md)
+- Código passo a passo (5 partes executáveis) em [`partes/`](partes/):
+  1. `parte-01-tela-imagens` — janela e sprites PNG (`image.load`, `convert_alpha`, `smoothscale`, `blit`)
+  2. `parte-02-cliques-teclas` — retângulos clicáveis e teclas 1–4
+  3. `parte-03-sequencia-estados` — sequência crescente e máquina de estados com `dt`
+  4. `parte-04-notas-sintetizadas` — síntese PCM senoidal (`array('h')`, envelope, `Sound(buffer=...)`)
+  5. `parte-05-sincronizacao-completa` — sincronização, pausa e mute (jogo completo)
+
+Cada parte roda sozinha: `cd partes/parte-0X-... && python3 main.py`.
+
+---
+
 ## 🎮 Controles
 
 | Entrada | Ação |

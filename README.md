@@ -35,7 +35,7 @@ A saída esperada deve exibir a versão do pygame-ce (ex.: `2.5.8` ou superior).
 | **Snake** | Iniciante | Game loop, grid discreto, listas/filas, colisão de borda/corpo | `cd snake && python3 snake_completo.py` | [roteiro](snake/docs/roteiro.md) · [partes](snake/partes/) |
 | **Pong** | Iniciante | Delta time, física contínua, reflexão vetorial, colisão AABB, IA reativa | `cd pong && python3 pong.py` | [roteiro](pong/docs/roteiro.md) · [partes](pong/partes/) |
 | **Squash Arcade** | Iniciante / Intermediário | Efeitos sonoros com `pygame.mixer` (`pre_init`, `Sound` com WAVs de `sons/`, canais `Channel` e volume por canal, mudo com `M`), delta time, ângulo de rebatida proporcional | `cd squash-arcade && python3 squash.py` | [roteiro](squash-arcade/docs/roteiro.md) · [partes](squash-arcade/partes/) |
-| **Genius Musical** | Iniciante / Intermediário | Sprites PNG (`image.load`, `convert_alpha`, `smoothscale`, `blit`), retângulos clicáveis, síntese PCM senoidal com `array('h')` e envelope, máquina de estados com `dt` | `cd genius-musical && python3 main.py` | em breve |
+| **Genius Musical** | Iniciante / Intermediário | Sprites PNG (`image.load`, `convert_alpha`, `smoothscale`, `blit`), retângulos clicáveis, síntese PCM senoidal com `array('h')` e envelope, máquina de estados com `dt` | `cd genius-musical && python3 main.py` | [roteiro](genius-musical/docs/roteiro.md) · [partes](genius-musical/partes/) |
 | **Breakout** | Iniciante / Intermediário | Resolução AABB por menor sobreposição, desvio angular, lista de entidades | `cd breakout && python3 breakout.py` | [roteiro](breakout/docs/roteiro.md) · [partes](breakout/partes/) |
 | **Flappy Bird** | Intermediário | Gravidade contínua, impulso vertical, rotação angular, reciclagem de canos, parallax | `cd flappy-bird && python3 main.py` | — |
 | **Space Invaders** | Intermediário | Classes/OOP, movimento de enxame sincronizado, cooldown, escudos destrutíveis | `cd space-invaders && python3 space_invaders.py` | — |
@@ -195,6 +195,8 @@ python3 squash.py
 ---
 
 ### 3.5. Genius Musical (`genius-musical`)
+
+> 🎬 **Aula em vídeo:** roteiro falado em [`genius-musical/docs/roteiro.md`](genius-musical/docs/roteiro.md) e código passo a passo (5 partes executáveis) em [`genius-musical/partes/`](genius-musical/partes/).
 
 #### O que é
 Jogo de memória audiovisual inspirado no *Simon*: quatro elementos flat (Fogo, Água, Terra e Ar) formam uma sequência crescente de notas. O jogo demonstra a sequência iluminando cada cartão e tocando a frequência correspondente; o jogador deve repeti-la com o mouse ou as teclas 1–4. Introduz **carregamento de sprites PNG** e **síntese sonora por senoide PCM**, após Squash Arcade (áudio via WAV) e antes de Breakout.
@@ -652,4 +654,5 @@ O foco central é didático: todos os códigos priorizam a legibilidade, a demon
 - **Snake** — código passo a passo em [`snake/partes/`](snake/partes/) e roteiro falado em [`snake/docs/roteiro.md`](snake/docs/roteiro.md).
 - **Pong** — código passo a passo em [`pong/partes/`](pong/partes/) e roteiro falado em [`pong/docs/roteiro.md`](pong/docs/roteiro.md).
 - **Squash Arcade** — código passo a passo em [`squash-arcade/partes/`](squash-arcade/partes/) e roteiro falado em [`squash-arcade/docs/roteiro.md`](squash-arcade/docs/roteiro.md).
+- **Genius Musical** — código passo a passo em [`genius-musical/partes/`](genius-musical/partes/) e roteiro falado em [`genius-musical/docs/roteiro.md`](genius-musical/docs/roteiro.md).
 - **Breakout** — código passo a passo em [`breakout/partes/`](breakout/partes/) e roteiro falado em [`breakout/docs/roteiro.md`](breakout/docs/roteiro.md).
